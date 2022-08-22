@@ -1,0 +1,330 @@
+version: "2.0"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+#  - action: utter_greet
+#  - action: fetch_id
+# - action: utter_id
+#  - action: action_id
+  - action: action_service
+
+- story: goodbye path
+  steps:
+  - intent: goodbye
+  - action: utter_else
+
+
+- story: payment path
+  steps:
+  - intent: Payment
+    entities:
+     - issue_type: "Payment"
+  - slot_was_set:
+     - issue_type: "Payment"
+  - action: utter_Payment
+  - intent: PerLoan
+    entities:
+     - loan_type: "PerLoan"
+  - slot_was_set:
+     - loan_type: "PerLoan"
+  - action: utter_PerLoan
+  - action: check_payment_P
+  - action: utter_DOP
+  - intent: DOP
+    entities:
+      - Date: "15/03/2021"
+  - slot_was_set:
+      - Date: "15/03/2021"
+  - action: utter_confirm
+  - action: utter_MOP
+
+- story: payment path 2
+  steps:
+  - intent: Payment
+    entities:
+     - issue_type: "Payment"
+  - slot_was_set:
+     - issue_type: "Payment"
+  - action: utter_Payment
+  - intent: DevLoan
+    entities:
+     - loan_type: "DevLoan"
+  - slot_was_set:
+     - loan_type: "DevLoan"
+  - action: utter_DevLoan
+  - action: check_payment_D
+  - slot_was_set:
+      - syncstatus: "failed"
+  - action: utter_DOP
+  - intent: DOP
+    entities:
+      - Date: "15/03/2021"
+  - slot_was_set:
+      - Date: "15/03/2021"
+  - action: utter_confirm
+  - action: utter_MOP
+
+
+- story: payment path 2
+  steps:
+    - intent: Payment
+      entities:
+        - issue_type: "Payment"
+    - slot_was_set:
+        - issue_type: "Payment"
+    - action: utter_Payment
+    - intent: DevLoan
+      entities:
+        - loan_type: "DevLoan"
+    - slot_was_set:
+        - loan_type: "DevLoan"
+    - action: utter_DevLoan
+    - action: check_payment_D
+    - slot_was_set:
+        - syncstatus: "success"
+    - action: utter_updated
+    - action: utter_else
+
+- story: Bounce1 path
+  steps:
+  - intent: Bounce
+    entities:
+     - issue_type: "Bounce"
+  - slot_was_set:
+     - issue_type: "Bounce"
+  - action: utter_Bounce
+  - intent: DevLoan
+    entities:
+     - loan_type: "DevLoan"
+  - slot_was_set:
+     - loan_type: "DevLoan"
+#  - action: utter_DevLoan
+  - action: utter_charges_reviewed_amount
+  - intent: charge_review_amount
+    entities:
+        - CRA: "6000"
+  - slot_was_set:
+        - CRA: "6000"
+  - action: utter_charges_reviewed_date
+  - intent: charge_review_date
+    entities:
+      - CRD: "15-03-2021"
+  - slot_was_set:
+      - CRD: "15-03-2021"
+  - action: utter_confirm_charge_review
+  - action: check_bounce_charge
+  - action: utter_applied
+
+
+
+
+- story: Bounce2 path
+  steps:
+  - intent: Bounce
+    entities:
+     - issue_type: "Bounce"
+  - slot_was_set:
+     - issue_type: "Bounce"
+  - action: utter_Bounce
+  - intent: PerLoan
+    entities:
+     - loan_type: "PerLoan"
+  - slot_was_set:
+     - loan_type: "PerLoan"
+#  - action: utter_PerLoan
+  - action: utter_charges_reviewed_amount
+  - intent: charge_review_amount
+    entities:
+        - CRA: "6000"
+  - slot_was_set:
+        - CRA: "6000"
+  - action: utter_charges_reviewed_date
+  - intent: charge_review_date
+    entities:
+      - CRD: "15-03-2021"
+  - slot_was_set:
+      - CRD: "15-03-2021"
+  - action: utter_confirm_charge_review
+  - action: check_bounce_charge
+  - action: utter_applied
+
+
+
+
+#- story: Human path
+#  steps:
+#  - intent: Human
+#    entities:
+#     - issue_type: "Human"
+#  - slot_was_set:
+#     - issue_type: "Human"
+#  - action: action_talk_to_human
+#  - action: utter_else
+
+#- story: Extra path 1
+#  steps:
+#  - intent: Extra
+#    entities:
+#     - issue_type: "Extra"
+#  - slot_was_set:
+#     - issue_type: "Extra"
+#  - action: utter_Extra
+#  - intent: DevLoan
+#  - action: utter_check_extra
+
+#- story: Extra path 2
+#  steps:
+#  - intent: Extra
+#    entities:
+#     - issue_type: "Extra"
+#  - slot_was_set:
+#     - issue_type: "Extra"
+#  - action: utter_Extra
+#  - intent: PersonalLoan
+#  - action: utter_check_extra
+
+- story: Uninstall path
+  steps:
+  - intent: Uninstall
+    entities:
+     - issue_type: "Uninstall"
+  - slot_was_set:
+     - issue_type: "Uninstall"
+  - action: utter_Uninstall
+  - action: check_loan_status
+  - action: utter_something_else
+
+- story: Locked path
+  steps:
+  - intent: Locked
+    entities:
+     - issue_type: "Locked"
+  - slot_was_set:
+     - issue_type: "Locked"
+  - action: utter_Locked
+  - action: check_lock
+  - action: utter_else
+
+#- story: Different path
+#  steps:
+#  - intent: Different
+#    entities:
+#     - issue_type: "Different"
+#  - slot_was_set:
+#     - issue_type: "Different"
+#  - action: utter_Different
+
+- story:  yes path
+  steps:
+   - intent: Yes
+   - action: action_service
+
+- story: No path
+  steps:
+    - intent: No
+    - action: utter_Bye
+    - action: action_session_start
+
+- story: Emi path
+  steps:
+    - intent: Emi
+    - action: utter_Emi
+
+
+- story: SF path
+  steps:
+  - intent: SF
+    entities:
+     - mop: "SF"
+  - slot_was_set:
+     - mop: "SF"
+  - action: utter_cmop
+  - action: utter_PID
+
+- story: Paytm path
+  steps:
+  - intent: Paytm
+    entities:
+     - mop: "Paytm"
+  - slot_was_set:
+     - mop: "Paytm"
+  - action: utter_cmop
+  - action: utter_PID
+
+
+- story: Gpay path
+  steps:
+  - intent: Gpay
+    entities:
+     - mop: "Gpay"
+  - slot_was_set:
+     - mop: "Gpay"
+  - action: utter_cmop
+  - action: utter_PID
+
+- story: Phonepe path
+  steps:
+  - intent: Phonepe
+    entities:
+     - mop: "Phonepe"
+  - slot_was_set:
+     - mop: "Phonepe"
+  - action: utter_cmop
+  - action: utter_PID
+
+- story: Airtel path
+  steps:
+  - intent: Airtel
+    entities:
+     - mop: "Airtel"
+  - slot_was_set:
+     - mop: "Airtel"
+  - action: utter_cmop
+  - action: utter_PID
+
+- story: UPI path
+  steps:
+  - intent: UPI
+    entities:
+     - mop: "UPI"
+  - slot_was_set:
+     - mop: "UPI"
+  - action: utter_cmop
+  - action: utter_PID
+
+- story: PID path
+  steps:
+  - intent: PID
+    entities:
+     - pid: "pid1234"
+  - slot_was_set:
+     - pid: "pid1234"
+  - action: utter_cpid
+  - action: utter_thank
+  - action: utter_else
+
+
+
+
+
+- story: nachmandate path
+  steps:
+    - intent: Nachmandate
+    - action: action_nachmandate
+    - action: utter_ask_review
+
+
+- story: Notdeducted path
+  steps:
+    - intent: Notdeducted
+    - action: action_Notdeducted
+    - action: utter_still_review
+
+- story: yes_review
+  steps:
+    - intent: Yes_review
+    - action: utter_yes_review
+    - action: utter_else

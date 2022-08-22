@@ -1,0 +1,62 @@
+{
+  "തീയതി": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 1,
+    "confused_with": {}
+  },
+  "CRA": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 2,
+    "confused_with": {}
+  },
+  "mop": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 9,
+    "confused_with": {}
+  },
+  "issue_type": {
+    "precision": 0.9285714285714286,
+    "recall": 0.9629629629629629,
+    "f1-score": 0.9454545454545454,
+    "support": 27,
+    "confused_with": {}
+  },
+  "pid": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 4,
+    "confused_with": {}
+  },
+  "CRD": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 10,
+    "confused_with": {}
+  },
+  "micro avg": {
+    "precision": 0.9629629629629629,
+    "recall": 0.9811320754716981,
+    "f1-score": 0.9719626168224299,
+    "support": 53
+  },
+  "macro avg": {
+    "precision": 0.9880952380952381,
+    "recall": 0.9938271604938271,
+    "f1-score": 0.9909090909090909,
+    "support": 53
+  },
+  "weighted avg": {
+    "precision": 0.9636118598382749,
+    "recall": 0.9811320754716981,
+    "f1-score": 0.97221269296741,
+    "support": 53
+  }
+}

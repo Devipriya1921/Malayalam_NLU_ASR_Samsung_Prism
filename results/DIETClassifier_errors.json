@@ -1,0 +1,57 @@
+[
+  {
+    "text": "എനിക്ക് വായ്പയുടെ ഒരു പ്രശ്നമുണ്ട് പേയ്മെന്റ്.",
+    "entities": [
+      {
+        "start": 35,
+        "end": 45,
+        "value": "പേയ്മെന്റ്",
+        "entity": "issue_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "വ്യത്യസ്ത",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "issue_type",
+        "start": 0,
+        "end": 9,
+        "confidence_entity": 0.8496514558792114,
+        "value": "വ്യത്യസ്ത",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "എന്റെ Emi പേയ്‌മെന്റ് സംബന്ധിച്ച് എനിക്ക് സംശയമുണ്ട്.",
+    "entities": [
+      {
+        "start": 6,
+        "end": 9,
+        "value": "Emi",
+        "entity": "issue_type"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "issue_type",
+        "start": 6,
+        "end": 9,
+        "confidence_entity": 0.9980676770210266,
+        "value": "Emi",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "issue_type",
+        "start": 10,
+        "end": 21,
+        "confidence_entity": 0.7364197373390198,
+        "value": "പേയ്‌മെന്റ്",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  }
+]

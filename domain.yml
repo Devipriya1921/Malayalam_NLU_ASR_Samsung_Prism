@@ -1,0 +1,313 @@
+version: '2.0'
+config:
+  store_entities_as_slots: true
+session_config:
+  session_expiration_time: 1
+  carry_over_slots_to_new_session: false
+intents:
+- greet:
+    use_entities: true
+- goodbye:
+    use_entities: true
+- Payment:
+    use_entities: true
+- Bounce:
+    use_entities: true
+
+- Human:
+    use_entities: true
+
+- Extra:
+    use_entities: true
+- Uninstall:
+    use_entities: true
+- Locked:
+    use_entities: true
+- Emi:
+    use_entities: true
+- Different:
+    use_entities: true
+- PerLoan:
+    use_entities: true
+- DevLoan:
+    use_entities: true
+- Yes:
+    use_entities: true
+- No:
+    use_entities: true
+- DOP:
+    use_entities: true
+- SF:
+    use_entities: true
+- Gpay:
+    use_entities: true
+- Paytm:
+    use_entities: true
+- Phonepe:
+    use_entities: true
+- Airtel:
+    use_entities: true
+- UPI:
+    use_entities: true
+- PID:
+    use_entities: true
+- out_of_scope:
+    use_entities: true
+- charge_review_date:
+    use_entities: true
+- charge_review_amount:
+    use_entities: true
+- DeviceLoan:
+    use_entities: true
+- PersonalLoan:
+    use_entities: true
+- EMIpayment:
+    use_entities: true
+- Nachmandate:
+    use_entities: true
+- Notdeducted:
+    use_entities: true
+- Yes_review:
+    use_entities: true
+
+
+entities:
+- issue_type
+- Date
+- mop
+- pid
+- Diff_title
+- CRD
+- CRA
+- loan_type
+slots:
+  Diff_title:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+
+  issue_type:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  loan_type:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  Date:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  mop:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+
+  pid:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+
+  id:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: 1
+    auto_fill: true
+    influence_conversation: true
+
+
+  new_user:
+    type: bool
+    initial_value: true
+    auto_fill: true
+    influence_conversation: true
+
+  CRA:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+
+  CRD:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+
+  syncstatus:
+    type: categorical
+    values:
+      - success
+      - failed
+      - nochange
+
+responses:
+  utter_greet:
+  - text: ഹേയ്! എനിക്ക് നിങ്ങളെ എങ്ങനെ സഹായിക്കാനാകും?
+  utter_Payment:
+  - buttons:
+    - payload: /PerLoan
+      title: വ്യക്തിഗത വായ്പ
+    - payload: /DevLoan
+      title: ഉപകരണ വായ്പ
+    text: പേയ്‌മെന്റ് അപ്‌ഡേറ്റ് ചെയ്യാത്ത വായ്പ തിരഞ്ഞെടുക്കുക
+  utter_Bounce:
+  - buttons:
+    - payload: /PerLoan
+      title: വ്യക്തിഗത വായ്പ
+    - payload: /DevLoan
+      title: ഉപകരണ വായ്പ
+    text: നിരക്കുകൾ അവലോകനം ചെയ്യേണ്ട ലോൺ തിരഞ്ഞെടുക്കുക.
+
+  utter_charges_reviewed_amount:
+  - text: അവലോകനത്തിനായി ചാർജ് തുക നൽകുക (രൂപയിൽ)
+
+  utter_charges_reviewed_date:
+  - text: അവലോകനത്തിനായി നിരക്കിന്റെ തീയതി നൽകുക (dd-mm-yyyy)
+
+  utter_confirm_charge_review:
+  - text: -{CRD}ൽ അടച്ച {CRA} തുകയ്‌ക്കായി നിങ്ങളുടെ നിരക്കുകൾ അവലോകനം ചെയ്‌തു
+
+  utter_applied:
+  - buttons:
+    - payload: /Payment{{"issue_type":"Payment"}}
+      title: മുൻകൂർ EMI പേയ്‌മെന്റ് നടത്തി
+    - payload: /Notdeducted
+      title: ബാങ്കിൽ നിന്ന് പണം കുറച്ചില്ല
+    - payload: /Nachmandate
+      title: നാച്ച് മാൻഡേറ്റ് ബൗൺസ് ചെയ്തില്ല
+    - payload: /No
+      title: ഇല്ല, നിരക്കുകൾ അവലോകനം ചെയ്യാൻ ഞാൻ ആഗ്രഹിക്കുന്നില്ല
+    text: നയം അനുസരിച്ച് നിരക്കുകൾ ബാധകമാണ്. നിങ്ങൾക്ക് അവ ഇപ്പോഴും അവലോകനം ചെയ്യണമെങ്കിൽ അവലോകനത്തിനുള്ള കാരണം തിരഞ്ഞെടുക്കുക.
+
+  utter_still_review:
+  - buttons:
+    - payload: /Yes_review
+      title: അതെ
+    - payload: /No
+      title: ഇല്ല
+    text: നിങ്ങൾക്ക് ഇപ്പോഴും ഒരു അവലോകനത്തിനായി അഭ്യർത്ഥിക്കണോ?
+
+  utter_yes_review:
+  - text: Please reach out to customer support at 9876543210
+
+  utter_ask_review:
+  - buttons:
+    - payload: /Payment{{"issue_type":"Payment"}}
+      title: അതെ
+    - payload: /No
+      title: ഇല്ല
+    text: നിങ്ങൾക്ക് ഇപ്പോഴും ഒരു അവലോകനത്തിനായി അഭ്യർത്ഥിക്കണോ?
+
+  utter_Extra:
+  - buttons:
+    - payload: /PersonalLoan
+      title: വ്യക്തിഗത വായ്പ
+    - payload: /DeviceLoan
+      title: ഉപകരണ വായ്പ
+    text: അധികമായി അടയ്‌ക്കേണ്ട വായ്പ തിരഞ്ഞെടുക്കുക.
+
+  utter_check_extra:
+  - text: ലോൺ തിരഞ്ഞെടുത്തതിന് നന്ദി. ഡിഎംഐ ഫിനാൻസ് ഉപയോഗിച്ച് ലോൺ സ്റ്റാറ്റസ് പരിശോധിക്കുമ്പോൾ കാത്തിരിക്കുക.
+
+  utter_Uninstall:
+  - text: സാംസങ് ഫിനാൻസ് പ്ലസ് പോളിസി അനുസരിച്ച്, നിങ്ങൾക്ക് ഒരു പേഴ്‌സണൽ ലോണോ ഉപകരണ ലോണോ ഉണ്ടെങ്കിൽ, ഫിനാൻസ് പ്ലസ് ആപ്ലിക്കേഷനും അൺഇൻസ്റ്റാൾ ചെയ്യാൻ നിങ്ങൾക്ക് കഴിയില്ല.
+  utter_Locked:
+  - text: നിങ്ങളുടെ ലോണിന്റെ നില ഞങ്ങൾ പരിശോധിക്കുന്നത് വരെ കാത്തിരിക്കുക
+  utter_ask_Diff_title:
+  - text: നിങ്ങളുടെ പ്രശ്നം വിവരിക്കണോ?
+  utter_PerLoan:
+  - text: ലോൺ തിരഞ്ഞെടുത്തതിന് നന്ദി. DMI ഫിനാൻസിൽ നിന്നുള്ള ലോൺ സ്റ്റാറ്റസ് പരിശോധിക്കുമ്പോൾ കാത്തിരിക്കുക.
+  utter_DevLoan:
+  - text: ലോൺ തിരഞ്ഞെടുത്തതിന് നന്ദി. DMI ഫിനാൻസിൽ നിന്നുള്ള ലോൺ സ്റ്റാറ്റസ് പരിശോധിക്കുമ്പോൾ കാത്തിരിക്കുക.
+  utter_else:
+  - buttons:
+    - payload: /Yes
+      title: അതെ
+    - payload: /No
+      title: ഇല്ല
+    text: മറ്റെന്തെങ്കിലും എനിക്ക് നിങ്ങൾക്കായി ചെയ്യാൻ കഴിയും
+  utter_Bye:
+  - text: നന്ദി .ഒരു നല്ല ദിവസം ആശംസിക്കുന്നു
+  utter_Emi:
+  - text: ദയവായി 9876543210 എന്ന DMI ഫിനാൻസ് സപ്പോർട്ട് ഹെൽപ്പ്ലൈനുമായി ബന്ധപ്പെട്ട് പേയ്‌മെന്റ് നടത്താൻ കൂടുതൽ സമയം അഭ്യർത്ഥിക്കുക. നിങ്ങളുടെ അഭ്യർത്ഥനയുടെ സ്വഭാവത്തെ അടിസ്ഥാനമാക്കി അവർക്ക് കൂടുതൽ സമയം നൽകാൻ കഴിഞ്ഞേക്കും.
+  utter_DOP:
+  - text: പേയ്‌മെന്റ് തീയതി ചേർക്കുക(dd/mm/yyyy).
+  utter_confirm:
+  - text: നിങ്ങളുടെ പേയ്‌മെന്റ് {Date}-ന് പരിശോധിക്കും
+  utter_thank:
+  - text: നന്ദി. ഞങ്ങൾ നിങ്ങളുടെ പേയ്‌മെന്റ് നില പരിശോധിച്ച് അടുത്ത 48 മണിക്കൂറിനുള്ളിൽ അത് അപ്‌ഡേറ്റ് ചെയ്യും.
+  utter_updated:
+    - text: നന്ദി. നിങ്ങളുടെ പേയ്മെന്റ് അപ്ഡേറ്റ് ചെയ്തു.
+  utter_PID:
+  - text: പേയ്‌മെന്റ് ഐഡി (pidxxxx) പങ്കിടുക.
+  utter_cmop:
+  - text: നിങ്ങളുടെ പേയ്‌മെന്റ് രീതി {mop} ആണ്
+  utter_cpid:
+  - text: നിങ്ങളുടെ പേയ്‌മെന്റ് ഐഡി {pid} ആണ്
+  utter_id:
+  - condition:
+      - type: slot
+        name: new_user
+        value: true
+    text: നിങ്ങളുടെ ഐഡി {id} ആണ്.
+  - condition:
+      - type: slot
+        name: new_user
+        value: false
+    text: നിങ്ങൾ ഒരു രജിസ്റ്റർ ചെയ്ത ഉപയോക്താവല്ല
+
+  utter_out_of_scope:
+  - text: ക്ഷമിക്കണം, നിങ്ങൾ പറഞ്ഞത് എനിക്ക് മനസ്സിലായില്ല. ദയവായി നിങ്ങൾ പറഞ്ഞത് വീണ്ടും എഴുതുക അല്ലെങ്കിൽ ഞങ്ങളുടെ കസ്റ്റമർ കെയറുമായി ബന്ധപ്പെടുക.
+
+  utter_something_else:
+    - buttons:
+      - payload: /Payment{{"issue_type":"Payment"}}
+        title: അതെ, ലോൺ അവസാനിച്ചെങ്കിലും പേയ്‌മെന്റ് അപ്‌ഡേറ്റ് ചെയ്തിട്ടില്ല.
+      - payload: /Yes
+        title: അതെ, മറ്റൊരു പ്രശ്നം
+      - payload: /No
+        title: ഇല്ല
+      text: മറ്റെന്തെങ്കിലും എനിക്ക് നിങ്ങൾക്കായി ചെയ്യാൻ കഴിയുമോ?
+
+
+  utter_MOP:
+  - buttons:
+    - payload: /SF{{"mop":"SF"}}
+      title: സാംസങ് ഫിനാൻസ്
+    - payload: /Gpay{{"mop":"Gpay"}}
+      title: ജീപ്പേ
+    - payload: /Paytm{{"mop":"Paytm"}}
+      title: പേടിഎം
+    - payload: /Phonepe{{"mop":"Phonepe"}}
+      title: ഫോൺപെ
+    - payload: /Airtel{{"mop":"Airtel"}}
+      title: എയർടെൽ
+    - payload: /UPI{{"mop":"UPI"}}
+      title: UPI/വെർച്വൽ അക്കൗണ്ട്
+    text: പേയ്‌മെന്റ് മോഡ് തിരഞ്ഞെടുക്കുക.
+actions:
+- action_service
+- check_lock
+- check_payment_D
+- check_payment_P
+- action_Diff_submit
+- check_loan_status
+- action_talk_to_human
+- action_session_start
+- action_id
+- fetch_id
+- check_bounce_charge
+- action_Notdeducted
+- action_nachmandate
+forms:
+  Diff_form:
+    Diff_title:
+      - type: from_text
+        entity: Diff_title
+e2e_actions: []
